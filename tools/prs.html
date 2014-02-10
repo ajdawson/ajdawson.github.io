@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>@ajdawson's pull requests</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <link href="github.css" media="screen" rel="stylesheet" type="text/css" /></link>
+        <link href="github2.css" media="screen" rel="stylesheet" type="text/css" /></link>
+        <link rel="shortcut icon" href="favicon.ico" />
+        <style>
+            #loading {
+                width: 440px;
+            }
+            img.avatar {
+                width: 20px;
+                height: 20px;
+            }
+        </style>
+    </head>
+
+    <body style="margin: 1em">
+
+
+        <script>
+
+            // Github username
+            var username = "ajdawson";
+
+            // all repositories the user contributed to
+            var repos = ["matplotlib/matplotlib",
+                         "matplotlib/basemap",
+                         "SciTools/iris",
+                         "SciTools/cartopy",
+                         "SciTools/iris-sample-data",
+                         "SciTools/iris-test-data",
+                         "SciTools/iris-code-generators",
+                         "ajdawson/eofs",
+                         "ajdawson/windspharm",
+                         "ajdawson/lscubes",];
+    
+            function render_user(user) {
+                result = '-';
+                if (user) {
+                    result = [
+                        $('<img class="avatar" src="' + user.avatar_url + '">'),
+                        ' ' + user.login
+                    ];
+                }
+                return result;
+            }
+
+            function user_container(row) {
+                cell = $('<td/>');
+                ul = $('<ul class="fieldpills usernames"/>');
+                li_empty = $('<li style="display: none"/>');
+                li = $('<li/>');
+                ul.append([li_empty, li]);
+                cell.append(ul);
+                row.append(cell);
+                return li;
+            }
+
+            function process_pull_requests(pulls) {
+                if (pulls.length > 0) {
+                    var target = $('#target');
+                    for (var i=0; i < pulls.length; i++) {
+                        var pull = pulls[i];
+                        if ((pull.user.login == username) || (pull.assignee && (pull.assignee.login == username))) {
+                            row = $('<tr class="list-browser-item"/>');
+                            row.append('<td>' + pull.base.repo.full_name + '</td>');
+                            row.append('<td class="number">#' + pull.number + '</td>');
+                            row.append('<td><h3><a href="' + pull.html_url + '">' + pull.title + '</a></h3></td>');
+                            if (pull.assignee) {
+                                container = user_container(row);
+                                container.append(render_user(pull.assignee));
+                                row.append('<td></td>');
+                            } else {
+                                row.append('<td>No Assigned Reviewer</td>');
+                                row.append('<td></td>');
+                            }
+                            row.append('<td>' + pull.base.ref + '</td>');
+                            target.append(row);
+                        }
+                    }
+                }
+            }
+
+            function process_repos() {
+                $('#loading').hide();
+                for (var i=0; i < repos.length; i++) {
+                    var repo = repos[i];
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://api.github.com/repos/' + repo + '/pulls',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        }).done(function(response) {
+                            process_pull_requests(response);
+                        }).fail(function(request, status, error) {
+                            alert(JSON.stringify(request) + status + error);
+                    });
+                }
+            }
+
+            $(document).ready(process_repos);
+
+        </script>
+
+        <div class="issues-list">
+            <table style="width: auto" id="target">
+                <tr><th colspan="5"><h2>@ajdawson's pull requests</h2></th></tr>
+                <tr>
+                    <th>Repository</th>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Assigned</th>
+                    <th>Branch</th>
+                </tr>
+                <tr id="loading"><td colspan="5">Loading ...</td></tr>
+            </table>
+        </div>
+
+    </body>
+
+</html>
