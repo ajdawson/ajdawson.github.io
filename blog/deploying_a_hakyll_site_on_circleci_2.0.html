@@ -1,21 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <title>Andrew Dawson - Blog</title>
-    <link href="https://ajdawson.github.io/atom.xml" rel="self" />
-    <link href="https://ajdawson.github.io" />
-    <id>https://ajdawson.github.io/atom.xml</id>
-    <author>
-        <name>Andrew Dawson</name>
-        <email>ajdawson@acm.org</email>
-    </author>
-    <updated>2018-07-04T00:00:00Z</updated>
-    <entry>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css">
+    <link rel="stylesheet" type="text/css" href="../css/site.css">
+    <link rel="stylesheet" type="text/css" href="../css/syntax.css">
+    
     <title>Deploying a Hakyll site on CircleCI 2.0</title>
-    <link href="https://ajdawson.github.io/blog/deploying_a_hakyll_site_on_circleci_2.0.html" />
-    <id>https://ajdawson.github.io/blog/deploying_a_hakyll_site_on_circleci_2.0.html</id>
-    <published>2018-07-04T00:00:00Z</published>
-    <updated>2018-07-04T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h2>
+  </head>
+  <body>
+    <div class="container">
+      <h1>- Deploying a Hakyll site on CircleCI 2.0</h1>
+      <h2>
   Posted on July  4, 2018
   
     by Andrew Dawson
@@ -23,7 +21,7 @@
 </h2>
 <h3>
   
-  Tags: <a href="/blog/tags/CircleCI.html">CircleCI</a>, <a href="/blog/tags/Haskell.html">Haskell</a>, <a href="/blog/tags/Hakyll.html">Hakyll</a>
+  Tags: <a href="../blog/tags/CircleCI.html">CircleCI</a>, <a href="../blog/tags/Haskell.html">Haskell</a>, <a href="../blog/tags/Hakyll.html">Hakyll</a>
   
 </h3>
 
@@ -85,7 +83,14 @@
             fi</code></pre></div>
 <p>This performs all the necessary steps to set up the build (including dependency caching), build the site, and optionally deploy it.</p>
 <p>It also stores the built site as a build artifact, which can be accessed on the build artifacts tab in the CircleCI interface. Doing this allows me to submit a PR to my source repository, have it built (but not deployed) on CircleCI, and review the change to the site. I can then merge the PR into the master branch where CircleCI will build it again and deploy it automatically.</p>
-]]></summary>
-</entry>
 
-</feed>
+      <ul class="nav">
+        <li>[<a href="../index.html">home</a>]</li>
+        <li>[<a href="../blog.html">blog</a>]</li>
+        <li>[<a href="../software.html">software</a>]</li>
+        <li>[<a href="../pubs.html">publications</a>]</li>
+        <li>[<a href="../contact.html">contact</a>]</li>
+      </ul>
+    </div>
+  </body>
+</html>
